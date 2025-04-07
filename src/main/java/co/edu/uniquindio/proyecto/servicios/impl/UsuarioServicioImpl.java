@@ -1,5 +1,8 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.ActivarCuentaDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CambiarPasswordDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EnviarCodigoDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CrearUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.UsuarioDTO;
@@ -17,6 +20,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -121,6 +125,51 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         }
 
         return optionalCuenta.get();
+    }
+
+    @Override
+    public void enviarCodigoVerificacion(EnviarCodigoDTO enviarCodigoDTO){ //throws Exception {
+       // Usuario usuario = obtenerPorEmail(enviarCodigoDTO.email());
+       // String codigo = generarCodigo();
+       // usuario.setCodigoValidacion(new CodigoValidacion(
+        //        codigo,
+        //        LocalDateTime.now()
+        //));
+       // usuarioRepositorio.save(usuario);
+    }
+
+    @Override
+    public void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO) { //throws Exception {
+       /* Usuario usuario = obtenerPorEmail(cambiarPasswordDTO.email());
+        if(!usuario.getCodigoValidacion().getCodigo().equals(cambiarPasswordDTO.codigoValidacion())) {
+            throw new Exception("El código de verificación es incorrecto");
+        }
+        if (usuario.getCodigoValidacion() == null) {
+            throw new Exception("No usuario no tiene un código de verificación");
+        }
+        if(!LocalDateTime.now().isBefore(usuario.getCodigoValidacion().getFechaCreacion().plusMinutes(15))) {
+            throw new Exception("El código de verificación ha caducado");
+        }
+        usuario.setPassword(cambiarPasswordDTO.nuevaPassword());
+        usuario.setCodigoValidacion(null);
+        usuarioRepositorio.save(usuario);*/
+    }
+
+    @Override
+    public void activarCuenta(ActivarCuentaDTO activarCuentaDTO) {//throws Exception {
+       /* Usuario usuario = obtenerPorEmail(activarCuentaDTO.email());
+        if(!usuario.getCodigoValidacion().getCodigo().equals(activarCuentaDTO.codigoValidacion())) {
+            throw new Exception("El código de verificación es incorrecto");
+        }
+        if(!LocalDateTime.now().isBefore(usuario.getCodigoValidacion().getFechaCreacion().plusMinutes(15))) {
+            throw new Exception("El código de verificación ha caducado");
+        }
+        if (usuario.getCodigoValidacion() == null) {
+            throw new Exception("No se encontró el usuario con el email ");
+        }
+        usuario.setEstado(EstadoUsuario.ACTIVO);
+        usuario.setCodigoValidacion(null);
+        usuarioRepositorio.save(usuario);*/
     }
 
 }

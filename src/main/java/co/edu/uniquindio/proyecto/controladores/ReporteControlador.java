@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
-import co.edu.uniquindio.proyecto.dto.EditarReporteDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
