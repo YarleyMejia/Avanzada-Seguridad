@@ -18,18 +18,18 @@ public class Notificacion {
     private ObjectId id;
     private String mensaje;
     private LocalDateTime fecha;
-    private String tipo; //Esta no la entiendo
+    private String tipo;
     private boolean leida;
     private ObjectId reporteId;
-    private ObjectId idUsuaria;
+    private ObjectId idUsuario;
 
     @Builder
-    public Notificacion(String mensaje, LocalDateTime fecha, String tipo, boolean leida, ObjectId reporteId, ObjectId idUsuaria) {
+    public Notificacion(String mensaje, LocalDateTime fecha, String tipo, boolean leida, ObjectId reporteId, ObjectId idUsuario) {
         this.mensaje = mensaje;
         this.fecha = fecha;
         this.tipo = tipo;
         this.leida = leida;
         this.reporteId = reporteId;
-        this.idUsuaria = idUsuaria;
+        this.idUsuario = idUsuario;
     }
 }

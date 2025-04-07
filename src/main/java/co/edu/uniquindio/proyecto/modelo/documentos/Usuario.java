@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
 public class Usuario {
 
     @Id
+    @EqualsAndHashCode.Include
     private ObjectId id;
 
     private String nombre;

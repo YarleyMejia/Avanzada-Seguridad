@@ -1,8 +1,8 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-import co.edu.uniquindio.proyecto.dto.CrearUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.EditarUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CrearUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EditarUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.excepciones.ElementoNoEncontradoException;
 import co.edu.uniquindio.proyecto.excepciones.ElementoRepetidoException;
 import co.edu.uniquindio.proyecto.mapper.UsuarioMapper;

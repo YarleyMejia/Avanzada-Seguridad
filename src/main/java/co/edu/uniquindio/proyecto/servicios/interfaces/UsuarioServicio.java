@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.servicios.interfaces;
-import co.edu.uniquindio.proyecto.dto.CrearUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.EditarUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CrearUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EditarUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.UsuarioDTO;
 
 import java.util.List;
 

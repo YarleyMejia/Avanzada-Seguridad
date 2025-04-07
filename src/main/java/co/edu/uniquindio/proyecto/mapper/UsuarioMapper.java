@@ -1,8 +1,8 @@
 package co.edu.uniquindio.proyecto.mapper;
 
-import co.edu.uniquindio.proyecto.dto.CrearUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.EditarUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CrearUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EditarUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import org.bson.types.ObjectId;
 import org.mapstruct.Mapper;
