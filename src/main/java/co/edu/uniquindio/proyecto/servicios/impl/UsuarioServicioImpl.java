@@ -41,9 +41,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if(existeEmail(crearUsuarioDTO.email())){
             throw new ElementoRepetidoException("El email ya está registrado");
         }
-
         Usuario usuario = usuarioMapper.toDocument(crearUsuarioDTO);
         usuarioRepo.save(usuario);
+
+        // Enviar código de verificación después de guardar el usuario
+        enviarCodigoVerificacion(new EnviarCodigoDTO(crearUsuarioDTO.email()));
 
     }
 
@@ -150,6 +152,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
                 codigo
         ));
         usuarioRepo.save(usuario);
+
+
     }
 
 
@@ -189,16 +193,17 @@ public class UsuarioServicioImpl implements UsuarioServicio {
        Usuario usuario = obtenerPorEmail(activarCuentaDTO.email());
 
         if (usuario.getCodigoValidacion() == null) {
-            throw new Exception("No se encontró el usuario con el email ");
+            throw new Exception(usuario.getCodigoValidacion() + "No se encontró el usuario con el email ");
         }
 
         if(!usuario.getCodigoValidacion().getCodigo().equals(activarCuentaDTO.codigoValidacion())) {
-            throw new Exception("El código de verificación es incorrecto");
+            throw new Exception(usuario.getCodigoValidacion()+"El código de verificación es incorrecto");
         }
+
         if(!LocalDateTime.now().isBefore(usuario.getCodigoValidacion().getFecha().plusMinutes(15))) {
-            throw new Exception("El código de verificación ha caducado");
+            throw new Exception(usuario.getCodigoValidacion()+"El código de verificación ha caducado");
         }
-        
+
         usuario.setEstado(EstadoUsuario.ACTIVO);
         usuario.setCodigoValidacion(null);
         usuarioRepo.save(usuario);
