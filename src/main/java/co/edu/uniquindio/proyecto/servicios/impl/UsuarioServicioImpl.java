@@ -59,10 +59,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         // Obtener el usuario que se quiere eliminar
         Usuario usuario = obtenerPorId(id);
-
         // Modificar el estado del usuario
         usuario.setEstado(EstadoUsuario.ELIMINADO);
-
         //Como el objeto cuenta ya tiene un id, el save() no crea un nuevo registro sino que actualiza el que ya existe
         usuarioRepo.save(usuario);
     }
@@ -153,10 +151,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         ));
         usuarioRepo.save(usuario);
 
-
     }
-
-
 
     private String generarCodigo() {
         String digitos = "0123456789";
@@ -170,7 +165,14 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
+        enviarCodigoVerificacion(new EnviarCodigoDTO(crearUsuarioDTO.email()));
         Usuario usuario = obtenerPorEmail(cambiarPasswordDTO.email());
+
+
+        String codigo = generarCodigo(); // por ejemplo, "45902"
+        CodigoValidacion codigoValidacion = new CodigoValidacion(LocalDateTime.now(), codigo);
+        usuario.setCodigoValidacion(codigoValidacion);
+
 
         if (usuario.getCodigoValidacion() == null) {
             throw new Exception("No usuario no tiene un código de verificación");

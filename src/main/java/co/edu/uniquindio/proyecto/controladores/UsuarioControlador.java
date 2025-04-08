@@ -24,7 +24,7 @@ public class UsuarioControlador {
 
     private final UsuarioServicio usuarioServicio;
 
-    // Registro de usuario nuevo usuario, se debe validar codigo de autenticacion
+    // implementacion satisfactoria 08/04/2025
         @PostMapping
     public ResponseEntity<MensajeDTO<String>> crear(@Valid @RequestBody CrearUsuarioDTO cuenta) throws Exception{
         usuarioServicio.crear(cuenta);
@@ -66,7 +66,7 @@ public class UsuarioControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Cuenta editada exitosamente"));
     }
 
-
+    //se prueba el metodo falta implementar la logica de enviar al correo
     @PostMapping("/codigoVerificacion")
     public ResponseEntity<MensajeDTO<String>> enviarCodigoVerificacion(@RequestBody EnviarCodigoDTO enviarCodigoDTO) throws Exception {
         usuarioServicio.enviarCodigoVerificacion(enviarCodigoDTO);
@@ -80,7 +80,7 @@ public class UsuarioControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Password cambiado correctamente."));
     }
 
-
+    // implementacion satisfactoria 08/04/2025
     @PutMapping("/{email}/activar")
     public ResponseEntity<MensajeDTO<String>> activarCuenta(@RequestBody ActivarCuentaDTO activarCuentaDTO) throws Exception {
         usuarioServicio.activarCuenta(activarCuentaDTO);
