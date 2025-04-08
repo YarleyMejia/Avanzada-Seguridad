@@ -4,6 +4,7 @@ package co.edu.uniquindio.proyecto.modelo.documentos;
 import co.edu.uniquindio.proyecto.modelo.enums.Ciudad;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoUsuario;
 import co.edu.uniquindio.proyecto.modelo.enums.Rol;
+import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
 import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
@@ -32,9 +33,11 @@ public class Usuario {
     private Rol rol;
     private EstadoUsuario estado;
     private LocalDateTime fechaRegistro;
+    private CodigoValidacion codigoValidacion;
 
     @Builder
-    public Usuario(String nombre, Ciudad ciudad, String direccion, String email, String telefono, String password, Rol rol, EstadoUsuario estado, LocalDateTime fechaRegistro) {
+    public Usuario(String nombre, Ciudad ciudad, String direccion, String email, String telefono,
+                   String password, Rol rol, EstadoUsuario estado, LocalDateTime fechaRegistro, CodigoValidacion codigoValidacion) {
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.direccion = direccion;
@@ -44,5 +47,6 @@ public class Usuario {
         this.rol = rol;
         this.estado = estado;
         this.fechaRegistro = fechaRegistro;
+        this.codigoValidacion = codigoValidacion;
     }
 }

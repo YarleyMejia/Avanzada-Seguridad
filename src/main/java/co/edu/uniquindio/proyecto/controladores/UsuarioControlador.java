@@ -62,7 +62,7 @@ public class UsuarioControlador {
     @SecurityRequirement(name = "bearerAuth")
     @PutMapping
     public ResponseEntity<MensajeDTO<String>> editarCuenta(@Valid @RequestBody EditarUsuarioDTO cuenta) throws Exception{
-        usuarioServicio.editar(cuenta);
+        usuarioServicio.editarCuenta(cuenta);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Cuenta editada exitosamente"));
     }
 

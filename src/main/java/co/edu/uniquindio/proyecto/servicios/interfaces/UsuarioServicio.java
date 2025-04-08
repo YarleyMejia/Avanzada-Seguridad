@@ -14,15 +14,15 @@ public interface UsuarioServicio {
 
     void eliminar(String id) throws Exception;
 
-    void editar(EditarUsuarioDTO cuenta) throws Exception;
+    void editarCuenta(EditarUsuarioDTO cuenta) throws Exception;
 
     UsuarioDTO obtener(String id) throws Exception;
 
     List<UsuarioDTO> listarTodos(String nombre, String ciudad, int pagina);
 
-    void enviarCodigoVerificacion(EnviarCodigoDTO enviarCodigoDTO);
+    void enviarCodigoVerificacion(EnviarCodigoDTO enviarCodigoDTO) throws Exception;
 
-    void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO);
+    void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO) throws Exception;
 
-    void activarCuenta(ActivarCuentaDTO activarCuentaDTO);
+    void activarCuenta(ActivarCuentaDTO activarCuentaDTO) throws Exception;
 }
