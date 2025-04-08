@@ -1,4 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios.interfaces;
+import co.edu.uniquindio.proyecto.dto.RecuperarPasswordDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.ActivarCuentaDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CambiarPasswordDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EnviarCodigoDTO;
@@ -18,11 +19,14 @@ public interface UsuarioServicio {
 
     UsuarioDTO obtener(String id) throws Exception;
 
-    List<UsuarioDTO> listarTodos(String nombre, String ciudad, int pagina);
+    //List<UsuarioDTO> listarTodos(String nombre, String ciudad, int pagina);
+    List<UsuarioDTO> listarTodos(String nombre, int pagina);
 
     void enviarCodigoVerificacion(EnviarCodigoDTO enviarCodigoDTO) throws Exception;
 
     void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO) throws Exception;
+
+    void recuperarPassword(RecuperarPasswordDTO recuperarPasswordDTO) throws Exception;
 
     void activarCuenta(ActivarCuentaDTO activarCuentaDTO) throws Exception;
 }

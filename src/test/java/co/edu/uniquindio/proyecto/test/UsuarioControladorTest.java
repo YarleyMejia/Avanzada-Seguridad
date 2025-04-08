@@ -24,7 +24,7 @@ public class UsuarioControladorTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void crearCorrectoTest() throws Exception {
+    public void crearTest() throws Exception {
 
         //Se crea un objeto para realizar la creación de la cuenta
         CrearUsuarioDTO cuentaDTO = new CrearUsuarioDTO(

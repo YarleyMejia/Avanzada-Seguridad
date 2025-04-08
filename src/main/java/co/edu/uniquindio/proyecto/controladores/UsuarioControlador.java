@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.controladores;
 
 
+import co.edu.uniquindio.proyecto.dto.RecuperarPasswordDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.ActivarCuentaDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CambiarPasswordDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EnviarCodigoDTO;
@@ -31,7 +32,7 @@ public class UsuarioControlador {
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Su registro ha sido exitoso, verificar tu correo y activa tu cuenta"));
     }
 
-
+    // implementacion satisfactoria hay que restringir algunops campos
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/{id}")
     public ResponseEntity<MensajeDTO<UsuarioDTO>> obtener(@PathVariable String id) throws Exception{
@@ -51,14 +52,15 @@ public class UsuarioControlador {
     @GetMapping
     public ResponseEntity<MensajeDTO<List<UsuarioDTO>>> listarTodos(
             @RequestParam(required = false) String nombre,
-            @RequestParam(required = false) String ciudad,
+            //@RequestParam(required = false) String ciudad, //otro parametro de filtro
             @RequestParam(defaultValue = "0") int pagina
     ) {
-        List<UsuarioDTO> lista = usuarioServicio.listarTodos(nombre, ciudad, pagina);
+       // List<UsuarioDTO> lista = usuarioServicio.listarTodos(nombre, ciudad, pagina); //
+        List<UsuarioDTO> lista = usuarioServicio.listarTodos(nombre, pagina);
         return ResponseEntity.ok(new MensajeDTO<>(false, lista));
     }
 
-
+    //implementacion satisfactoria 08/04/2025
     @SecurityRequirement(name = "bearerAuth")
     @PutMapping
     public ResponseEntity<MensajeDTO<String>> editarCuenta(@Valid @RequestBody EditarUsuarioDTO cuenta) throws Exception{
@@ -73,12 +75,21 @@ public class UsuarioControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Codigo enviado correctamente."));
     }
 
-
+    // implementacion satisfactoria 08/04/2025
     @PutMapping("/{email}/password")
     public ResponseEntity<MensajeDTO<String>> cambiarPassword(@RequestBody CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
         usuarioServicio.cambiarPassword(cambiarPasswordDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Password cambiado correctamente."));
     }
+
+    @PostMapping("/recuperar-password")
+    public ResponseEntity<MensajeDTO<String>> recuperarPassword(@RequestBody RecuperarPasswordDTO recuperarPasswordDTO) throws Exception
+    {
+        usuarioServicio.recuperarPassword(recuperarPasswordDTO);
+        //return ResponseEntity.status(200).body(new MensajeDTO<>(false, "Su registro ha sido exitoso, verificar tu correo y activa tu cuenta"));
+        return ResponseEntity.ok(new MensajeDTO<>(false, "Password recuperado correctamente."));
+    }
+
 
     // implementacion satisfactoria 08/04/2025
     @PutMapping("/{email}/activar")

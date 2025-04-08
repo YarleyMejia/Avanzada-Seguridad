@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
+import co.edu.uniquindio.proyecto.dto.RecuperarPasswordDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.ActivarCuentaDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CambiarPasswordDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EnviarCodigoDTO;
@@ -92,8 +93,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         return usuarioOptional.get();
     }
 
+    // public List<UsuarioDTO> listarTodos(String nombre, String ciudad, int pagina) {
     @Override
-    public List<UsuarioDTO> listarTodos(String nombre, String ciudad, int pagina) {
+    public List<UsuarioDTO> listarTodos(String nombre, int pagina) {
 
         // Validar que la pagina no sea menor a 0
         if(pagina < 0) throw new RuntimeException("La pagina no puede ser menor a 0");
@@ -105,9 +107,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             criteria.and("nombre").regex(nombre, "i"); // Insensible a mayúsculas/minúsculas
         }
 
-        if (ciudad != null && !ciudad.isEmpty()) {
+        /*if (ciudad != null && !ciudad.isEmpty()) {
             criteria.and("ciudad").regex(ciudad, "i");
-        }
+        }*/
 
         // Crear la consulta con los criterios y la paginación de 5 elementos por página
         Query query = new Query(criteria).with(PageRequest.of(pagina, 5));
@@ -165,17 +167,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public void cambiarPassword(CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
-        enviarCodigoVerificacion(new EnviarCodigoDTO(crearUsuarioDTO.email()));
+
         Usuario usuario = obtenerPorEmail(cambiarPasswordDTO.email());
 
-
-        String codigo = generarCodigo(); // por ejemplo, "45902"
-        CodigoValidacion codigoValidacion = new CodigoValidacion(LocalDateTime.now(), codigo);
-        usuario.setCodigoValidacion(codigoValidacion);
-
-
         if (usuario.getCodigoValidacion() == null) {
-            throw new Exception("No usuario no tiene un código de verificación");
+            throw new Exception("El usuario no cuenta con código de verificación");
         }
 
         if(!usuario.getCodigoValidacion().getCodigo().equals(cambiarPasswordDTO.codigoValidacion())) {
@@ -209,6 +205,28 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuario.setEstado(EstadoUsuario.ACTIVO);
         usuario.setCodigoValidacion(null);
         usuarioRepo.save(usuario);
+    }
+
+    @Override
+    public void recuperarPassword(RecuperarPasswordDTO RecuperarPasswordDTO)throws Exception {
+
+        Usuario usuario = obtenerPorEmail(RecuperarPasswordDTO.email());
+
+        if (usuario.getCodigoValidacion() == null) {
+            throw new Exception("El usuario no cuenta con código de verificación");
+        }
+
+        if (!usuario.getCodigoValidacion().getCodigo().equals(RecuperarPasswordDTO.codigoValidacion())) {
+            throw new Exception("El código de verificación es incorrecto");
+        }
+
+
+
+        usuario.setPassword(RecuperarPasswordDTO.nuevaPassword());
+        usuario.setCodigoValidacion(null);
+        usuarioRepo.save(usuario);
+
+
     }
 
 }
