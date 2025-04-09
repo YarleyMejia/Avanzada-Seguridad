@@ -5,9 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.ObjectId;
-import org.mapstruct.Builder;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 
@@ -16,10 +13,13 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HistorialReporte {
-    @Id
-    private ObjectId clienteId;
-    private String observaciones;
+
+    private LocalDateTime fechaCambio;
     private EstadoReporte estado;
-    private LocalDateTime fecha;
+    private String descripcion;
+    private String idModerador; // opcional, puede ser null si fue el usuario
+
+    public HistorialReporte(LocalDateTime now, EstadoReporte estadoReporte, String reporteCreado) {
+    }
 
 }

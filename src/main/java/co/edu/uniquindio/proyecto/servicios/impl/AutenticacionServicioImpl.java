@@ -33,7 +33,7 @@ public class AutenticacionServicioImpl implements AutenticacionServicio {
             throw new Exception("La cuenta aún no está activada");
         }
 
-        
+
     }
 
     @Override

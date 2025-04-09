@@ -1,5 +1,29 @@
 package co.edu.uniquindio.proyecto.controladores;
 
+import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
+import co.edu.uniquindio.proyecto.servicios.interfaces.ReporteServicio;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/reportes")
+@RequiredArgsConstructor
+public class ReporteControlador {
+
+    private final ReporteServicio reporteServicio;
+
+    @PostMapping("/crear")
+    public ResponseEntity<MensajeDTO<String>> crearReporte(@Valid @RequestBody CrearReporteDTO crearReporteDTO) throws Exception {
+        reporteServicio.crearReporte(crearReporteDTO);
+        return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Reporte creado exitosamente"));
+    }
+}
+
+/*package co.edu.uniquindio.proyecto.controladores;
+
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
@@ -31,4 +55,4 @@ public class ReporteControlador {
         return ResponseEntity.ok( new MensajeDTO<>(false, "Reporte eliminado exitosamente"));
     }
 
-}
+}*/
