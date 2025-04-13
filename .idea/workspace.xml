@@ -4,15 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dcf5c43-f4c7-4b65-8c8d-3c21ef15324b" name="Changes" comment="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio, se crea tambien el controlador y elm DTO">
-      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/mapper/ComentarioMapper.java" afterDir="false" />
+    <list default="true" id="8dcf5c43-f4c7-4b65-8c8d-3c21ef15324b" name="Changes" comment="Se corrije toda la implementacion de Comentario">
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/CrearCategoriaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/EditarCategoriaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/EliminarCategoriaDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/CategoriaRepo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/CategoriaServicioImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/ComentarioControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/ComentarioControlador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/ComentarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/ComentarioDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Comentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Comentario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/ComentarioRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/ComentarioRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ComentarioServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ComentarioServicioImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/ComentarioServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/ComentarioServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/CategoriaControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/CategoriaControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/mapper/CategoriaMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/mapper/CategoriaMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Categoria.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Categoria.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/CategoriaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/CategoriaServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +52,9 @@
         <option value="Enum" />
         <option value="HTML File" />
         <option value="HTTP Request" />
-        <option value="Class" />
-        <option value="Interface" />
         <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -169,7 +171,7 @@
       <updated>1743903597132</updated>
       <workItem from="1743903598234" duration="4329000" />
       <workItem from="1743909441390" duration="34000" />
-      <workItem from="1744499642581" duration="9231000" />
+      <workItem from="1744499642581" duration="11278000" />
     </task>
     <task id="LOCAL-00001" summary="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio">
       <option name="closed" value="true" />
@@ -187,7 +189,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744505961928</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Se corrije toda la implementacion de Comentario">
+      <option name="closed" value="true" />
+      <created>1744521931240</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1744521931240</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +206,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio" />
     <MESSAGE value="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio, se crea tambien el controlador y elm DTO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio, se crea tambien el controlador y elm DTO" />
+    <MESSAGE value="Se corrije toda la implementacion de Comentario" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se corrije toda la implementacion de Comentario" />
   </component>
 </project>
