@@ -1,46 +1,18 @@
-package co.edu.uniquindio.proyecto.dto.reporte;
+package co.edu.uniquindio.proyecto.dto.paqueteReporteDTO;
 
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
-import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import org.bson.types.ObjectId;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class EditarReporteDTO {
-
-    @NotNull
-    private LocalDateTime fecha;
-
-    @NotBlank
-    private String descripcion;
-
-    @NotNull
-    private Integer contadorImportante;
-
-    @NotBlank
-    private String titulo;
-
-    @NotNull
-    private Ubicacion ubicacion;
-
-    @NotNull
-    private List<HistorialReporte> historial;
-
-    @NotBlank
-    private String categoriaId;
-
-    private List<String> fotos;
-
-    @NotNull
-    private EstadoReporte estadoActual;
-
-}
+public record EditarReporteDTO(
+        @NotBlank String titulo,
+        @NotBlank String descripcion,
+        @NotNull Ubicacion ubicacion,
+        @NotNull ObjectId categoriaId,
+        @NotNull EstadoReporte estadoActual,
+        List<String> fotos
+) {}

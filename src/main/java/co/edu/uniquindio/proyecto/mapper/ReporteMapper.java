@@ -26,6 +26,8 @@ public interface ReporteMapper {
     @Mapping(target = "fotos", source = "rutaImagenes")
     Reporte toDocument(CrearReporteDTO dto);
 
+
+
     // Conversión manual de DTO a VO
     default Ubicacion mapUbicacion(UbicacionDTO dto) {
         return dto != null ? new Ubicacion(dto.latitud(), dto.longitud()) : null;
