@@ -3,6 +3,7 @@ package co.edu.uniquindio.proyecto.controladores;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
+import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ReporteServicio;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -29,11 +30,24 @@ public class ReporteControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte editado correctamente"));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable String id) {
         try {
             reporteServicio.eliminarReporte(id);
             return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte eliminado correctamente"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MensajeDTO<>(true, e.getMessage()));
+        }
+    }
+
+    @PutMapping("/cambiarEstado/{id}")
+    public ResponseEntity<MensajeDTO<String>> cambiarEstado(
+            @PathVariable String id,
+            @RequestParam EstadoReporte nuevoEstado
+    ) {
+        try {
+            reporteServicio.cambiarEstadoReporte(id, nuevoEstado);
+            return ResponseEntity.ok(new MensajeDTO<>(false, "Estado del reporte actualizado correctamente"));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new MensajeDTO<>(true, e.getMessage()));
         }

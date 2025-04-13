@@ -17,12 +17,12 @@ public class Categoria {
     @Id
     private ObjectId id;
     private String nombre;
-    private String icono; // sino se va a usar, eliminarlo.
+    private String descripcion; // sino se va a usar, eliminarlo.
 
     @Builder
 
-    public Categoria(String nombre, String icono) {
+    public Categoria(String nombre, String descripcion) {
         this.nombre = nombre;
-        this.icono = icono;
+        this.descripcion = descripcion;
     }
 }

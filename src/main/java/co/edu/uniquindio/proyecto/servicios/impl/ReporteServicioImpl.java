@@ -2,6 +2,7 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
@@ -100,6 +101,39 @@ public class ReporteServicioImpl implements ReporteServicio {
         reporteRepo.deleteById(objectId);
     }
 
+    @Override
+    public void cambiarEstadoReporte(String id, EstadoReporte nuevoEstado) throws Exception {
+        ObjectId objectId;
+
+        try {
+            objectId = new ObjectId(id);
+        } catch (IllegalArgumentException e) {
+            throw new Exception("ID de reporte inválido");
+        }
+
+        Reporte reporte = reporteRepo.findById(objectId)
+                .orElseThrow(() -> new Exception("No se encontró un reporte con el ID proporcionado"));
+
+        // Actualizar el estado actual
+        reporte.setEstadoActual(nuevoEstado);
+
+        // Registrar el cambio en el historial
+        List<HistorialReporte> historial = reporte.getHistorial();
+        if (historial == null) {
+            historial = new ArrayList<>();
+        }
+
+        historial.add(new HistorialReporte(
+                LocalDateTime.now(),
+                nuevoEstado,
+                "Cambio de estado manual"
+        ));
+
+        reporte.setHistorial(historial);
+
+        // Guardar los cambios
+        reporteRepo.save(reporte);
+    }
 
 
 
