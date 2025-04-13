@@ -1,4 +1,7 @@
 package co.edu.uniquindio.proyecto.dto;
 
-public class TokenDTO {
-}
+
+
+public record TokenDTO(
+        String token
+) {}

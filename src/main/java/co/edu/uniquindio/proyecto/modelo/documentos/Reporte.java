@@ -32,7 +32,10 @@ public class Reporte {
     private EstadoReporte estadoActual;
 
     @Builder
-    public Reporte( LocalDateTime fecha, String descripcion, int contadorImportante, ObjectId clienteId, String titulo, Ubicacion ubicacion, List<HistorialReporte> historial, ObjectId categoriaId, List<String> fotos, EstadoReporte estadoActual) {
+    public Reporte(ObjectId id, LocalDateTime fecha, String descripcion, int contadorImportante, ObjectId clienteId,
+                   String titulo, Ubicacion ubicacion, List<HistorialReporte> historial,
+                   ObjectId categoriaId, List<String> fotos, EstadoReporte estadoActual) {
+        this.id = id;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.contadorImportante = contadorImportante;

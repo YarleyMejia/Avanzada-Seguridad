@@ -1,7 +1,7 @@
 package co.edu.uniquindio.proyecto.test;
 
-import co.edu.uniquindio.proyecto.dto.CrearUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.EditarUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CrearUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EditarUsuarioDTO;
 import co.edu.uniquindio.proyecto.modelo.enums.Ciudad;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,7 @@ public class UsuarioControladorTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void crearCorrectoTest() throws Exception {
+    public void crearTest() throws Exception {
 
         //Se crea un objeto para realizar la creación de la cuenta
         CrearUsuarioDTO cuentaDTO = new CrearUsuarioDTO(

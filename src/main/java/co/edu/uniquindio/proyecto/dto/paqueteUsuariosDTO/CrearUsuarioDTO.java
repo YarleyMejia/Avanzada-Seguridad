@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyecto.dto;
+package co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO;
 
 
 import co.edu.uniquindio.proyecto.modelo.enums.Ciudad;

@@ -1,13 +1,16 @@
 package co.edu.uniquindio.proyecto.modelo.vo;
 
+
 import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class Ubicacion {
-    private Double longitud;
-    private Double latitud;
+
+    private double latitud;
+    private double longitud;
 
 }

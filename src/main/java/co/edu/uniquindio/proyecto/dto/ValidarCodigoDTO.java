@@ -11,3 +11,4 @@ public record ValidarCodigoDTO (
         @NotBlank(message = "El código es obligatorio debe de ingresarlo")
         String codigo
 ){}
+
