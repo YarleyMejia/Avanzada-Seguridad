@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dcf5c43-f4c7-4b65-8c8d-3c21ef15324b" name="Changes" comment="Se implementan todos los requerimientos de las Categorias">
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/proyecto/test/CategoriaControladorTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/proyecto/test/ComentarioControladorTest.java" afterDir="false" />
+    <list default="true" id="8dcf5c43-f4c7-4b65-8c8d-3c21ef15324b" name="Changes" comment="Pruebas unitarias para categoria controlador y comentario controlador">
+      <change afterPath="$PROJECT_DIR$/src/main/java/Pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/Wbs/WebSocketConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/NotificacionDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/NotificacionServicioImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/NotificacionServicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/co/edu/uniquindio/proyecto/test/NotificacionControladorTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/NotificacionControlador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/NotificacionControlador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Notificacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Notificacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/NotificacionRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/NotificacionRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,8 +94,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
     "Gradle.Build Avanzada-Seguridad.executor": "Run",
     "Gradle.UsuarioControladorTest.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -164,7 +177,7 @@
       <updated>1743903597132</updated>
       <workItem from="1743903598234" duration="4329000" />
       <workItem from="1743909441390" duration="34000" />
-      <workItem from="1744499642581" duration="12450000" />
+      <workItem from="1744499642581" duration="15910000" />
     </task>
     <task id="LOCAL-00001" summary="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio">
       <option name="closed" value="true" />
@@ -198,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744524213339</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Pruebas unitarias para categoria controlador y comentario controlador">
+      <option name="closed" value="true" />
+      <created>1744525280297</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1744525280297</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,6 +230,7 @@
     <MESSAGE value="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio, se crea tambien el controlador y elm DTO" />
     <MESSAGE value="Se corrije toda la implementacion de Comentario" />
     <MESSAGE value="Se implementan todos los requerimientos de las Categorias" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se implementan todos los requerimientos de las Categorias" />
+    <MESSAGE value="Pruebas unitarias para categoria controlador y comentario controlador" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pruebas unitarias para categoria controlador y comentario controlador" />
   </component>
 </project>
