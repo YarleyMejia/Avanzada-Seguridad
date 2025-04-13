@@ -17,12 +17,13 @@ public class Comentario {
     @Id
     private ObjectId id;
     private ObjectId reporteId;
-    private String texto;
-    private LocalDateTime fecha;
     private ObjectId clienteId;
+    private String mensaje;
+    private LocalDateTime fecha;
 
-    public Comentario(String texto, LocalDateTime fecha, ObjectId clienteId) {
-        this.texto = texto;
+
+    public Comentario(String mensaje, LocalDateTime fecha, ObjectId clienteId) {
+        this.mensaje = mensaje;
         this.fecha = fecha;
         this.clienteId = clienteId;
     }
