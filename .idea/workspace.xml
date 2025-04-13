@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8dcf5c43-f4c7-4b65-8c8d-3c21ef15324b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ComentarioServicioImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/CategoriaServicio.java" afterDir="false" />
+    <list default="true" id="8dcf5c43-f4c7-4b65-8c8d-3c21ef15324b" name="Changes" comment="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio">
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/controladores/ComentarioControlador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/dto/ComentarioDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Comentario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/modelo/documentos/Comentario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/ComentarioRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/repositorios/ComentarioRepo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ComentarioServicioImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/impl/ComentarioServicioImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/ComentarioServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/proyecto/servicios/interfaces/ComentarioServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -166,11 +168,24 @@
       <updated>1743903597132</updated>
       <workItem from="1743903598234" duration="4329000" />
       <workItem from="1743909441390" duration="34000" />
-      <workItem from="1744499642581" duration="2970000" />
+      <workItem from="1744499642581" duration="6002000" />
     </task>
+    <task id="LOCAL-00001" summary="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio">
+      <option name="closed" value="true" />
+      <created>1744502725842</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1744502725842</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio" />
+    <option name="LAST_COMMIT_MESSAGE" value="Se crea la clase comentario servicio, junto con su reoppositorio, implememtacion e interfaz, se adiciona tambien la categoria servicio" />
   </component>
 </project>
