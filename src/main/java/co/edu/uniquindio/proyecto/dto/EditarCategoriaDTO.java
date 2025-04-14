@@ -8,3 +8,4 @@ public record EditarCategoriaDTO(
         @NotBlank String id
 ) {
 }
+

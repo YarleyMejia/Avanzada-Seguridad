@@ -7,3 +7,4 @@ public record CrearCategoriaDTO(
         @NotBlank String descripcion
 ) {
 }
+

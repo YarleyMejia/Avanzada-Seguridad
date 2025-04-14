@@ -10,3 +10,4 @@ public record ComentarioDTO(
         @NotBlank String mensaje,
         LocalDateTime fecha)
 {}
+

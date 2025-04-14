@@ -6,3 +6,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface CategoriaRepo extends MongoRepository<Categoria, ObjectId>{
 }
+

@@ -7,3 +7,4 @@ public record NotificacionDTO(
         String idUsuario
 ) {
 }
+
