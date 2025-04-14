@@ -1,33 +1,53 @@
 package co.edu.uniquindio.proyecto.controladores;
 
+import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.NotificacionDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Notificacion;
 import co.edu.uniquindio.proyecto.servicios.interfaces.NotificacionServicio;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/notificaciones")
+@RequiredArgsConstructor
 public class NotificacionControlador {
 
-    @Autowired
-    private NotificacionServicio notificacionServicio;
+    private final NotificacionServicio notificacionServicio;
 
-    @PostMapping
-    public void crearNotificacion(@Valid @RequestBody NotificacionDTO dto) {
-        notificacionServicio.notificar(dto);
+    // Endpoint que crea y envía la notificación por WebSocket
+    @PostMapping("/enviar")
+    public ResponseEntity<MensajeDTO<String>> enviarNotificacion(@Valid @RequestBody NotificacionDTO dto) {
+        try {
+            notificacionServicio.notificar(dto); // Aquí dentro se dispara el WebSocket
+            return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Notificación enviada vía WebSocket"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MensajeDTO<>(true, "Error al enviar la notificación: " + e.getMessage()));
+        }
     }
 
+    // Listar notificaciones históricas por usuario
     @GetMapping("/usuario/{usuarioId}")
-    public List<Notificacion> listarPorUsuario(@PathVariable String usuarioId) {
-        return notificacionServicio.listarPorUsuario(usuarioId);
+    public ResponseEntity<MensajeDTO<List<Notificacion>>> listarPorUsuario(@PathVariable String usuarioId) {
+        try {
+            List<Notificacion> notificaciones = notificacionServicio.listarPorUsuario(usuarioId);
+            return ResponseEntity.ok(new MensajeDTO<>(false, notificaciones));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MensajeDTO<>(true, null));
+        }
     }
 
-    @PutMapping("/{id}/leida")
-    public void marcarComoLeida(@PathVariable String id) {
-        notificacionServicio.marcarComoLeida(id);
+    // Marcar notificación como leída
+    @PutMapping("/leida/{id}")
+    public ResponseEntity<MensajeDTO<String>> marcarComoLeida(@PathVariable String id) {
+        try {
+            notificacionServicio.marcarComoLeida(id);
+            return ResponseEntity.ok(new MensajeDTO<>(false, "Notificación marcada como leída"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MensajeDTO<>(true, "Error al marcar la notificación: " + e.getMessage()));
+        }
     }
 }

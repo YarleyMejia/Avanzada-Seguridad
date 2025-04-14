@@ -32,6 +32,9 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
     implementation ("org.springframework.boot:spring-boot-starter-mail") //verificar
 
+    // Dependencia para soporte WebSocket con STOMP
+    implementation ("org.springframework.boot:spring-boot-starter-websocket")
+
     implementation("org.mapstruct:mapstruct:1.6.3")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
 
