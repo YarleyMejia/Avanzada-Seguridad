@@ -1,22 +1,5 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
-
-import co.edu.uniquindio.proyecto.dto.NotificacionDTO;
-import co.edu.uniquindio.proyecto.modelo.documentos.Notificacion;
-import co.edu.uniquindio.proyecto.servicios.interfaces.NotificacionServicio;
-
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-
-
-@Service
-public class NotificacionServicioImpl implements NotificacionServicio {
-
-
-    @Override
-    public void notificar(NotificacionDTO dto) {
-
 import co.edu.uniquindio.proyecto.dto.NotificacionDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Notificacion;
 import co.edu.uniquindio.proyecto.repositorios.NotificacionRepo;
@@ -59,24 +42,15 @@ public class NotificacionServicioImpl implements NotificacionServicio {
 
         // Enviar por email (simplificado)
         enviarCorreo(dto.idUsuario(), dto.tipo(), dto.mensaje());
-
     }
 
     @Override
     public List<Notificacion> listarPorUsuario(String idUsuario) {
-
-        return List.of();
         return notificacionRepo.findByIdUsuarioOrderByFechaDesc(new ObjectId(idUsuario));
-
     }
 
     @Override
     public void marcarComoLeida(String id) {
-
-
-    }
-}
-
         Notificacion noti = notificacionRepo.findById(new ObjectId(id))
                 .orElseThrow(() -> new RuntimeException("Notificación no encontrada"));
         noti.setLeida(true);
@@ -93,4 +67,3 @@ public class NotificacionServicioImpl implements NotificacionServicio {
     }
 
 }
-
