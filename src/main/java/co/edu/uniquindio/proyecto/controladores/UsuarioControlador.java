@@ -25,7 +25,10 @@ public class UsuarioControlador {
 
     private final UsuarioServicio usuarioServicio;
 
+
+
     // implementacion satisfactoria 08/04/2025
+    @SecurityRequirement(name = "bearerAuth")
         @PostMapping
     public ResponseEntity<MensajeDTO<String>> crear(@Valid @RequestBody CrearUsuarioDTO cuenta) throws Exception{
         usuarioServicio.crear(cuenta);

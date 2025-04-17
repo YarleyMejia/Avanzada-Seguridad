@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,6 +35,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     private final UsuarioRepo usuarioRepo;
     private final UsuarioMapper usuarioMapper;
     private final MongoTemplate mongoTemplate;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void crear(CrearUsuarioDTO crearUsuarioDTO) throws Exception {
@@ -43,6 +45,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
             throw new ElementoRepetidoException("El email ya está registrado");
         }
         Usuario usuario = usuarioMapper.toDocument(crearUsuarioDTO);
+        // Se codifica la contraseña
+        usuario.setPassword(passwordEncoder.encode(crearUsuarioDTO.password()));
         usuarioRepo.save(usuario);
 
         // Enviar código de verificación después de guardar el usuario
