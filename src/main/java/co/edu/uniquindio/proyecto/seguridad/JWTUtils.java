@@ -41,5 +41,3 @@ public class JWTUtils {
         return Keys.hmacShaKeyFor(secretKeyBytes);
     }
 }
-
-

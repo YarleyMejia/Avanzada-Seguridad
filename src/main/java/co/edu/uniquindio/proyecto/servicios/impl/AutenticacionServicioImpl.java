@@ -43,7 +43,7 @@ public class AutenticacionServicioImpl implements AutenticacionServicio {
         Map<String, String> claims = Map.of(
                 "id", usuario.getId().toString(),
                 "email", usuario.getEmail(),
-                "rol", "ROLE_" + usuario.getRol().name(),
+                "rol", usuario.getRol().name(),   //"ROLE_" +
                 "estado", usuario.getEstado().name()
         );
         // 4. Generar token con tu método de JWTUtils
@@ -64,6 +64,3 @@ public class AutenticacionServicioImpl implements AutenticacionServicio {
         // Aquí iría la lógica si decides mantenerla aquí
     }*/
 }
-
-
-

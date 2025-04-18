@@ -42,11 +42,16 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req
                         .requestMatchers(
-                                "/api/auth/**",               // Tu endpoint público actual
-                                "/swagger-ui/**",             // Swagger UI
-                                "/v3/api-docs/**",            // Documentación OpenAPI
-                                "/swagger-resources/**",      // Recursos estáticos
-                                "/webjars/**"                 // JS/CSS de Swagger
+                                "/api/auth/**",
+                                "/api/usuarios", // POST de creación de usuario
+                                "/api/usuarios/recuperar-password",
+                                "/api/usuarios/codigoVerificacion",
+                                "/api/usuarios/*/activar",
+                                "/api/usuarios/*/password",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+                                "/webjars/**"
                         ).permitAll()
 
                         // Ejemplo de endpoint solo para ADMIN

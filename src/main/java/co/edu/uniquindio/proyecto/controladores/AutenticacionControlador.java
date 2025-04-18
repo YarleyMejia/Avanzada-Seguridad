@@ -25,7 +25,7 @@ public class AutenticacionControlador {
     private final AutenticacionServicio autenticacionServicio;
     private final UsuarioRepo usuarioRepo;
     private final PasswordEncoder passwordEncoder;
-    @PreAuthorize("hasRole('ADMINISTRADOR')")
+
     @PostMapping("/login")
     public ResponseEntity<MensajeDTO<TokenDTO>> login(@Valid @RequestBody LoginDTO loginDTO) throws Exception {
         TokenDTO token = autenticacionServicio.login(loginDTO);

@@ -192,7 +192,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     @Override
     public void activarCuenta(ActivarCuentaDTO activarCuentaDTO) throws Exception {
-       Usuario usuario = obtenerPorEmail(activarCuentaDTO.email());
+        Usuario usuario = obtenerPorEmail(activarCuentaDTO.email());
 
         if (usuario.getCodigoValidacion() == null) {
             throw new Exception("No se encontró el usuario con el email ");
