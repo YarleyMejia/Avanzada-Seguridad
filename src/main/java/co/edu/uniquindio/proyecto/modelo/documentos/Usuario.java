@@ -34,10 +34,12 @@ public class Usuario {
     private EstadoUsuario estado;
     private LocalDateTime fechaRegistro;
     private CodigoValidacion codigoValidacion;
+    private int reputacion = 0;
 
     @Builder
     public Usuario(String nombre, Ciudad ciudad, String direccion, String email, String telefono,
-                   String password, Rol rol, EstadoUsuario estado, LocalDateTime fechaRegistro, CodigoValidacion codigoValidacion) {
+                   String password, Rol rol, EstadoUsuario estado, LocalDateTime fechaRegistro,
+                   CodigoValidacion codigoValidacion, int reputacion) {
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.direccion = direccion;
@@ -48,5 +50,6 @@ public class Usuario {
         this.estado = estado;
         this.fechaRegistro = fechaRegistro;
         this.codigoValidacion = codigoValidacion;
+        this.reputacion = reputacion;
     }
 }

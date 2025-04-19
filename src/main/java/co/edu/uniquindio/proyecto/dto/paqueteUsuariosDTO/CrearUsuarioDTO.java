@@ -13,6 +13,7 @@ public record CrearUsuarioDTO(
         @NotNull Ciudad ciudad,
         @NotBlank @Length(max = 100) String direccion,
         @NotBlank @Length(max = 50) @Email String email,
-        @NotBlank @Length(min = 7, max = 20) String password
+        @NotBlank @Length(min = 7, max = 20) String password,
+        int reputacion
 ) {
 }
