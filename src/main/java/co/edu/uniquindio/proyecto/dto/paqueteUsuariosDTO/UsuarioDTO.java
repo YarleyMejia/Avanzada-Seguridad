@@ -9,5 +9,6 @@ public record UsuarioDTO (
         String estado,
         String rol,
         String fechaRegistro,
-        String codigoValidacion
+        String codigoValidacion,
+        int reputacion
 ){}

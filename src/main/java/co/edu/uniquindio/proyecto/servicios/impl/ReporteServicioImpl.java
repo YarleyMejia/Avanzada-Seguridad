@@ -5,9 +5,11 @@ import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
+import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
+import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ReporteServicio;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +26,7 @@ public class ReporteServicioImpl implements ReporteServicio {
 
     private final ReporteRepo reporteRepo;
     private final ReporteMapper reporteMapper;
+    private final UsuarioRepo usuarioRepo;
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -151,6 +155,21 @@ public class ReporteServicioImpl implements ReporteServicio {
         // Aumentar el contador
         reporte.setContadorImportante(reporte.getContadorImportante() + 1);
 
+        // Obtener el ID del usuario creador del reporte
+        ObjectId creadorId = reporte.getClienteId();
+
+
+
+// Buscar el usuario en la base de datos
+        Optional<Usuario> usuarioOptional = usuarioRepo.findById(creadorId);
+
+        if (usuarioOptional.isPresent()) {
+            Usuario creador = usuarioOptional.get();
+            creador.setReputacion(creador.getReputacion() + 1);
+            usuarioRepo.save(creador); // Guardar el cambio
+        }
+
+        
         // Guardar cambios
         reporteRepo.save(reporte);
     }
