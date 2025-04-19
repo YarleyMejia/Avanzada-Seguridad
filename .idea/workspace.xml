@@ -79,8 +79,11 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "Gradle.Build Avanzada-Seguridad.executor": "Run",
+    "Gradle.NotificacionControladorTest.executor": "Run",
+    "Gradle.UsuarioControladorTest.eliminarTest.executor": "Run",
     "Gradle.UsuarioControladorTest.executor": "Run",
     "Gradle.UsuarioControladorTest.obtenerTest.executor": "Run",
+    "Gradle.UsuarioControladorTest.obtenerTodosTest.executor": "Run",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
     "RequestMappingsPanelWidth0": "75",
@@ -264,5 +267,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/co/edu/uniquindio/proyecto/test/ReporteMapperTest.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
