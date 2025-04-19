@@ -136,9 +136,22 @@ public class ReporteServicioImpl implements ReporteServicio {
     }
 
     @Override
-    public void marcarImportante(String id) {
+    public void marcarImportante(String id) throws Exception {
+        ObjectId objectId;
 
+        try {
+            objectId = new ObjectId(id);
+        } catch (IllegalArgumentException e) {
+            throw new Exception("ID de reporte inválido");
+        }
+
+        Reporte reporte = reporteRepo.findById(objectId)
+                .orElseThrow(() -> new Exception("Reporte no encontrado"));
+
+        // Aumentar el contador
+        reporte.setContadorImportante(reporte.getContadorImportante() + 1);
+
+        // Guardar cambios
+        reporteRepo.save(reporte);
     }
-
-
 }
