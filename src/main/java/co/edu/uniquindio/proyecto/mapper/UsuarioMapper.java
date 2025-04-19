@@ -1,9 +1,10 @@
 package co.edu.uniquindio.proyecto.mapper;
 
-import co.edu.uniquindio.proyecto.dto.CrearUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.EditarUsuarioDTO;
-import co.edu.uniquindio.proyecto.dto.UsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.CrearUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.EditarUsuarioDTO;
+import co.edu.uniquindio.proyecto.dto.paqueteUsuariosDTO.UsuarioDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
+import co.edu.uniquindio.proyecto.modelo.vo.CodigoValidacion;
 import org.bson.types.ObjectId;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -30,5 +31,8 @@ public interface UsuarioMapper {
     default ObjectId map(String value) {
         return value != null ? new ObjectId(value) : null;
     }
+
+    // Mapeo de CodigoValidacion a String
+    default String map(CodigoValidacion value) {return value != null ? value.getCodigo() : null;}
 
 }

@@ -17,9 +17,10 @@ public class Comentario {
     @Id
     private ObjectId id;
     private ObjectId reporteId;
+    private ObjectId clienteId;
     private String mensaje;
     private LocalDateTime fecha;
-    private ObjectId clienteId;
+
 
     public Comentario(String mensaje, LocalDateTime fecha, ObjectId clienteId) {
         this.mensaje = mensaje;

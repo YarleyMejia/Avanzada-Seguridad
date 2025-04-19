@@ -9,3 +9,5 @@ public record LoginDTO(
         @NotBlank @Length(min=7) String password
 ) {
 }
+
+
