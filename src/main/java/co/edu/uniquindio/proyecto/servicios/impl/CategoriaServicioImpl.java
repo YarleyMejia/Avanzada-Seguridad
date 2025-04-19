@@ -3,56 +3,62 @@ package co.edu.uniquindio.proyecto.servicios.impl;
 import co.edu.uniquindio.proyecto.dto.CrearCategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.EditarCategoriaDTO;
 import co.edu.uniquindio.proyecto.dto.EliminarCategoriaDTO;
-import co.edu.uniquindio.proyecto.mapper.CategoriaMapper;
 import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
 import co.edu.uniquindio.proyecto.repositorios.CategoriaRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.CategoriaServicio;
+import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
+@Service
+@RequiredArgsConstructor
 public class CategoriaServicioImpl implements CategoriaServicio {
-    @Autowired
-    private CategoriaRepo categoriaRepo;
+
+    private final CategoriaRepo categoriaRepo;
 
     @Override
     public Categoria crear(CrearCategoriaDTO dto) {
-        Categoria categoria = CategoriaMapper.toEntity(dto);
+        Categoria categoria = Categoria.builder()
+                .nombre(dto.nombre())
+                .descripcion(dto.descripcion())
+                .build();
+
         return categoriaRepo.save(categoria);
     }
 
     @Override
     public Categoria editar(EditarCategoriaDTO dto) {
-        Optional<Categoria> optional = categoriaRepo.findById(new ObjectId(dto.id()));
-        if (optional.isPresent()) {
-            Categoria existente = optional.get();
-            existente.setNombre(dto.nombre());
-            existente.setDescripcion(dto.descripcion());
-            return categoriaRepo.save(existente);
-        }
-        throw new RuntimeException("Categoría no encontrada");
+        Categoria categoria = categoriaRepo.findById(new ObjectId(dto.id()))
+                .orElseThrow(() -> new RuntimeException("La categoría no existe"));
+
+        categoria.setNombre(dto.nombre());
+        categoria.setDescripcion(dto.descripcion());
+
+        return categoriaRepo.save(categoria);
     }
 
     @Override
     public void eliminar(EliminarCategoriaDTO dto) {
-        ObjectId id = new ObjectId(dto.id());
-        if (!categoriaRepo.existsById(id)) {
-            throw new RuntimeException("Categoría no encontrada para eliminar");
-        }
-        categoriaRepo.deleteById(id);
+        Categoria categoria = categoriaRepo.findById(new ObjectId(dto.id()))
+                .orElseThrow(() -> new RuntimeException("La categoría no existe"));
+
+        categoriaRepo.delete(categoria);
     }
 
     @Override
     public Categoria buscarPorId(String id) {
         return categoriaRepo.findById(new ObjectId(id))
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada"));
+                .orElseThrow(() -> new RuntimeException("La categoría no existe"));
     }
 
     @Override
     public List<Categoria> listar() {
         return categoriaRepo.findAll();
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> pablo
 }

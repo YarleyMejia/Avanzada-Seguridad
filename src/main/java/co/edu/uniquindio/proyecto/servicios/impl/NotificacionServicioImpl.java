@@ -4,9 +4,14 @@ import co.edu.uniquindio.proyecto.dto.NotificacionDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Notificacion;
 import co.edu.uniquindio.proyecto.repositorios.NotificacionRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.NotificacionServicio;
+<<<<<<< HEAD
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
+=======
+import lombok.RequiredArgsConstructor;
+import org.bson.types.ObjectId;
+>>>>>>> pablo
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,15 +20,21 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class NotificacionServicioImpl implements NotificacionServicio {
     @Autowired
     private NotificacionRepo notificacionRepo;
 
+<<<<<<< HEAD
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
     @Autowired
     private JavaMailSender mailSender;
+=======
+    private final NotificacionRepo notificacionRepo;
+    private final SimpMessagingTemplate messagingTemplate;
+>>>>>>> pablo
 
     @Override
     public void notificar(NotificacionDTO dto) {
@@ -35,6 +46,7 @@ public class NotificacionServicioImpl implements NotificacionServicio {
         noti.setFecha(LocalDateTime.now());
         noti.setLeida(false);
 
+<<<<<<< HEAD
         notificacionRepo.save(noti);
 
         // Enviar por WebSocket
@@ -42,10 +54,29 @@ public class NotificacionServicioImpl implements NotificacionServicio {
 
         // Enviar por email (simplificado)
         enviarCorreo(dto.idUsuario(), dto.tipo(), dto.mensaje());
+=======
+        // Crear notificación con datos básicos
+        Notificacion notificacion = Notificacion.builder()
+                .mensaje(dto.mensaje())
+                .fecha(LocalDateTime.now())
+                .tipo("GENERAL")  // Puedes parametrizar esto si lo incluyes en el DTO
+                .leida(false)
+                .reporteId(null)
+                .idUsuario(new ObjectId(dto.idUsuario()))
+                .build();
+
+        // Guardar en la base de datos
+        notificacionRepo.save(notificacion);
+
+        // Enviar al canal WebSocket personalizado del usuario
+        String destino = "/topic/notificaciones/" + dto.idUsuario();
+        messagingTemplate.convertAndSend(destino, dto.mensaje());
+>>>>>>> pablo
     }
 
     @Override
     public List<Notificacion> listarPorUsuario(String idUsuario) {
+<<<<<<< HEAD
         return notificacionRepo.findByIdUsuarioOrderByFechaDesc(new ObjectId(idUsuario));
     }
 
@@ -55,6 +86,18 @@ public class NotificacionServicioImpl implements NotificacionServicio {
                 .orElseThrow(() -> new RuntimeException("Notificación no encontrada"));
         noti.setLeida(true);
         notificacionRepo.save(noti);
+=======
+        return notificacionRepo.findAllByIdUsuario(new ObjectId(idUsuario));
+    }
+
+    @Override
+    public void marcarComoLeida(String idNotificacion) {
+        Notificacion notificacion = notificacionRepo.findById(new ObjectId(idNotificacion))
+                .orElseThrow(() -> new RuntimeException("Notificación no encontrada"));
+
+        notificacion.setLeida(true);
+        notificacionRepo.save(notificacion);
+>>>>>>> pablo
     }
 
     private void enviarCorreo(String usuarioId, String asunto, String mensaje) {

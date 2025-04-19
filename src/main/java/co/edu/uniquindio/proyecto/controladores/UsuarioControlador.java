@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +26,11 @@ public class UsuarioControlador {
 
     private final UsuarioServicio usuarioServicio;
 
+
+
     // implementacion satisfactoria 08/04/2025
-        @PostMapping
+
+    @PostMapping
     public ResponseEntity<MensajeDTO<String>> crear(@Valid @RequestBody CrearUsuarioDTO cuenta) throws Exception{
         usuarioServicio.crear(cuenta);
         return ResponseEntity.status(201).body(new MensajeDTO<>(false, "Su registro ha sido exitoso, verificar tu correo y activa tu cuenta"));
@@ -40,6 +44,7 @@ public class UsuarioControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, info));
     }
 
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/{id}")
     public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable String id) throws Exception{
@@ -49,19 +54,20 @@ public class UsuarioControlador {
 
 
     // Listar usuarios con filtros y paginación
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping
     public ResponseEntity<MensajeDTO<List<UsuarioDTO>>> listarTodos(
             @RequestParam(required = false) String nombre,
             //@RequestParam(required = false) String ciudad, //otro parametro de filtro
             @RequestParam(defaultValue = "0") int pagina
     ) {
-       // List<UsuarioDTO> lista = usuarioServicio.listarTodos(nombre, ciudad, pagina); //
+        // List<UsuarioDTO> lista = usuarioServicio.listarTodos(nombre, ciudad, pagina); //
         List<UsuarioDTO> lista = usuarioServicio.listarTodos(nombre, pagina);
         return ResponseEntity.ok(new MensajeDTO<>(false, lista));
     }
 
     //implementacion satisfactoria 08/04/2025
-    @SecurityRequirement(name = "bearerAuth")
+
     @PutMapping
     public ResponseEntity<MensajeDTO<String>> editarCuenta(@Valid @RequestBody EditarUsuarioDTO cuenta) throws Exception{
         usuarioServicio.editarCuenta(cuenta);

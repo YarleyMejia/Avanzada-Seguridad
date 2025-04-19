@@ -53,4 +53,11 @@ public class ReporteControlador {
         }
     }
 
+    // Marca un reporte como importante
+    @PutMapping("/{id}/importante")
+    public ResponseEntity<String> marcarImportante(@PathVariable String id) throws Exception {
+        reporteServicio.marcarImportante(id);
+        return ResponseEntity.ok("Reporte calificado como importante");
+    }
+
 }
