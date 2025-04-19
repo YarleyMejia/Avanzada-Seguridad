@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 "/api/usuarios/codigoVerificacion",
                                 "/api/usuarios/*/activar",
                                 "/api/usuarios/*/password",
+                                "/api/reportes/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",

@@ -135,7 +135,10 @@ public class ReporteServicioImpl implements ReporteServicio {
         reporteRepo.save(reporte);
     }
 
+    @Override
+    public void marcarImportante(String id) {
 
+    }
 
 
 }

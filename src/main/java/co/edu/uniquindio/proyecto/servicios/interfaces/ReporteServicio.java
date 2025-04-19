@@ -12,8 +12,6 @@ public interface ReporteServicio {
     void editarReporte(String id, EditarReporteDTO reporte) throws Exception;
     void eliminarReporte(String id) throws Exception;
     void cambiarEstadoReporte(String id, EstadoReporte nuevoEstado) throws Exception;
-
-
-
+    void marcarImportante(String id);
 }
 
