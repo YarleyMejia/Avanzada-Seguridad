@@ -174,23 +174,15 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
         Usuario usuario = obtenerPorEmail(cambiarPasswordDTO.email());
 
-        if (usuario.getCodigoValidacion() == null) {
-            throw new Exception("El usuario no cuenta con código de verificación");
+        // Verificar si la contraseña actual es correcta
+        if (!passwordEncoder.matches(cambiarPasswordDTO.passwordActual(), usuario.getPassword())) {
+            throw new Exception("La contraseña actual es incorrecta");
         }
 
-        if(!usuario.getCodigoValidacion().getCodigo().equals(cambiarPasswordDTO.codigoValidacion())) {
-            throw new Exception("El código de verificación es incorrecto");
-        }
-
-        if(!LocalDateTime.now().isBefore(usuario.getCodigoValidacion().getFecha().plusMinutes(15))) {
-            throw new Exception("El código de verificación ha caducado");
-        }
-
-        // Codifica la nueva contraseña
+        // Codificar la nueva contraseña
         String nuevaPasswordCodificada = passwordEncoder.encode(cambiarPasswordDTO.nuevaPassword());
 
         usuario.setPassword(nuevaPasswordCodificada);
-        usuario.setCodigoValidacion(null);
         usuarioRepo.save(usuario);
     }
 
@@ -218,19 +210,26 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     @Override
     public void recuperarPassword(RecuperarPasswordDTO RecuperarPasswordDTO)throws Exception {
 
+
         Usuario usuario = obtenerPorEmail(RecuperarPasswordDTO.email());
 
         if (usuario.getCodigoValidacion() == null) {
             throw new Exception("El usuario no cuenta con código de verificación");
         }
 
-        if (!usuario.getCodigoValidacion().getCodigo().equals(RecuperarPasswordDTO.codigoValidacion())) {
+
+        if(!usuario.getCodigoValidacion().getCodigo().equals(RecuperarPasswordDTO.codigoValidacion())) {
             throw new Exception("El código de verificación es incorrecto");
         }
 
+        if(!LocalDateTime.now().isBefore(usuario.getCodigoValidacion().getFecha().plusMinutes(15))) {
+            throw new Exception("El código de verificación ha caducado");
+        }
 
+        // Codifica la nueva contraseña
 
-        usuario.setPassword(RecuperarPasswordDTO.nuevaPassword());
+        String nuevaPasswordCodificada = passwordEncoder.encode(RecuperarPasswordDTO.nuevaPassword());
+        usuario.setPassword(nuevaPasswordCodificada);
         usuario.setCodigoValidacion(null);
         usuarioRepo.save(usuario);
 

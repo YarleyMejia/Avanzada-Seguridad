@@ -83,13 +83,13 @@ public class UsuarioControlador {
 
     // implementacion satisfactoria 08/04/2025
     @PutMapping("/{email}/cambiarPassword")
-    public ResponseEntity<MensajeDTO<String>> cambiarPassword(@RequestBody CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
+    public ResponseEntity<MensajeDTO<String>> cambiarPassword(@Valid @RequestBody CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
         usuarioServicio.cambiarPassword(cambiarPasswordDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Password cambiado correctamente."));
     }
 
     @PostMapping("/recuperar-password")
-    public ResponseEntity<MensajeDTO<String>> recuperarPassword(@RequestBody RecuperarPasswordDTO recuperarPasswordDTO) throws Exception
+    public ResponseEntity<MensajeDTO<String>> recuperarPassword(@Valid @RequestBody RecuperarPasswordDTO recuperarPasswordDTO) throws Exception
     {
         usuarioServicio.recuperarPassword(recuperarPasswordDTO);
         //return ResponseEntity.status(200).body(new MensajeDTO<>(false, "Su registro ha sido exitoso, verificar tu correo y activa tu cuenta"));
