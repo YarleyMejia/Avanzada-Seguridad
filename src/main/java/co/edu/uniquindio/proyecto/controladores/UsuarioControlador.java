@@ -82,7 +82,7 @@ public class UsuarioControlador {
     }
 
     // implementacion satisfactoria 08/04/2025
-    @PutMapping("/{email}/password")
+    @PutMapping("/{email}/cambiarPassword")
     public ResponseEntity<MensajeDTO<String>> cambiarPassword(@RequestBody CambiarPasswordDTO cambiarPasswordDTO) throws Exception {
         usuarioServicio.cambiarPassword(cambiarPasswordDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Password cambiado correctamente."));

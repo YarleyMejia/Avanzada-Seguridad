@@ -47,7 +47,7 @@ public class SecurityConfig {
                                 "/api/usuarios/recuperar-password",
                                 "/api/usuarios/codigoVerificacion",
                                 "/api/usuarios/*/activar",
-                                "/api/usuarios/*/password",
+                                "/api/usuarios/*/cambiarPassword",
                                 "/api/reportes/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",

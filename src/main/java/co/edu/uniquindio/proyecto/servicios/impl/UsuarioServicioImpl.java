@@ -50,7 +50,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         usuarioRepo.save(usuario);
 
         // Enviar código de verificación después de guardar el usuario
-        enviarCodigoVerificacion(new EnviarCodigoDTO(crearUsuarioDTO.email()));
+        //enviarCodigoVerificacion(new EnviarCodigoDTO(crearUsuarioDTO.email()));
 
     }
 
@@ -185,7 +185,11 @@ public class UsuarioServicioImpl implements UsuarioServicio {
         if(!LocalDateTime.now().isBefore(usuario.getCodigoValidacion().getFecha().plusMinutes(15))) {
             throw new Exception("El código de verificación ha caducado");
         }
-        usuario.setPassword(cambiarPasswordDTO.nuevaPassword());
+
+        // Codifica la nueva contraseña
+        String nuevaPasswordCodificada = passwordEncoder.encode(cambiarPasswordDTO.nuevaPassword());
+
+        usuario.setPassword(nuevaPasswordCodificada);
         usuario.setCodigoValidacion(null);
         usuarioRepo.save(usuario);
     }
