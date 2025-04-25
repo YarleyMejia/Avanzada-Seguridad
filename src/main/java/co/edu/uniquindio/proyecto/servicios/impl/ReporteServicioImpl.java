@@ -169,7 +169,7 @@ public class ReporteServicioImpl implements ReporteServicio {
             usuarioRepo.save(creador); // Guardar el cambio
         }
 
-        
+
         // Guardar cambios
         reporteRepo.save(reporte);
     }

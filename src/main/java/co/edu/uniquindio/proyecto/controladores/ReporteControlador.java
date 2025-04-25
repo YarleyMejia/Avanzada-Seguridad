@@ -5,9 +5,12 @@ import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ReporteServicio;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -40,10 +43,14 @@ public class ReporteControlador {
         }
     }
 
+    //@SecurityRequirement(name = "bearerAuth")
+   // @PreAuthorize("hasRole('ADMINISTRADOR')")
     @PutMapping("/cambiarEstado/{id}")
     public ResponseEntity<MensajeDTO<String>> cambiarEstado(
             @PathVariable String id,
             @RequestParam EstadoReporte nuevoEstado
+
+
     ) {
         try {
             reporteServicio.cambiarEstadoReporte(id, nuevoEstado);
@@ -52,6 +59,7 @@ public class ReporteControlador {
             return ResponseEntity.badRequest().body(new MensajeDTO<>(true, e.getMessage()));
         }
     }
+
 
     // Marca un reporte como importante
     @PutMapping("/{id}/importante")

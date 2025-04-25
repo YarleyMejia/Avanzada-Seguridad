@@ -71,9 +71,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public void editarCuenta(EditarUsuarioDTO editarUsuarioDTO) throws ElementoNoEncontradoException {
+    public void editarCuenta(String id,EditarUsuarioDTO editarUsuarioDTO) throws ElementoNoEncontradoException {
         // Obtener el usuario que se quiere modificar
-        Usuario cuentaModificada = obtenerPorId(editarUsuarioDTO.id());
+        Usuario cuentaModificada = obtenerPorId(id);
         // Mapear los datos actualizados al usuario existente
         usuarioMapper.toDocument(editarUsuarioDTO, cuentaModificada);
         //Como el objeto cuenta ya tiene un id, el save() no crea un nuevo registro sino que actualiza el que ya existe

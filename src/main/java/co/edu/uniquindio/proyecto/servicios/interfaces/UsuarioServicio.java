@@ -15,7 +15,7 @@ public interface UsuarioServicio {
 
     void eliminar(String id) throws Exception;
 
-    void editarCuenta(EditarUsuarioDTO cuenta) throws Exception;
+    void editarCuenta(String id,EditarUsuarioDTO cuenta) throws Exception;
 
     UsuarioDTO obtener(String id) throws Exception;
 

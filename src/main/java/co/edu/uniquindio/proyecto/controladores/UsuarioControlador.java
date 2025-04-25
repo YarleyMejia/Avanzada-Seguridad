@@ -67,16 +67,16 @@ public class UsuarioControlador {
     }
 
     //implementacion satisfactoria 08/04/2025
-
-    @PutMapping
-    public ResponseEntity<MensajeDTO<String>> editarCuenta(@Valid @RequestBody EditarUsuarioDTO cuenta) throws Exception{
-        usuarioServicio.editarCuenta(cuenta);
+    @SecurityRequirement(name = "bearerAuth")
+    @PutMapping("/{id}")
+    public ResponseEntity<MensajeDTO<String>> editarCuenta(@PathVariable String id , @Valid @RequestBody EditarUsuarioDTO cuenta) throws Exception{
+        usuarioServicio.editarCuenta(id,cuenta);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Cuenta editada exitosamente"));
     }
 
     //se prueba el metodo falta implementar la logica de enviar al correo
     @PostMapping("/codigoVerificacion")
-    public ResponseEntity<MensajeDTO<String>> enviarCodigoVerificacion(@RequestBody EnviarCodigoDTO enviarCodigoDTO) throws Exception {
+    public ResponseEntity<MensajeDTO<String>> enviarCodigoVerificacion(@Valid @RequestBody EnviarCodigoDTO enviarCodigoDTO) throws Exception {
         usuarioServicio.enviarCodigoVerificacion(enviarCodigoDTO);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Codigo enviado correctamente."));
     }

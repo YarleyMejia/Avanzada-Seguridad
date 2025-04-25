@@ -4,7 +4,8 @@ public enum EstadoReporte {
     PENDIENTE,
     RESUELTO,
     VERIFICADO,
-    RECHAZADO;
+    RECHAZADO,
+    ELIMINADO;
 
 
 }
