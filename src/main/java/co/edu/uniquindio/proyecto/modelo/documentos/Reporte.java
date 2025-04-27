@@ -1,6 +1,7 @@
 package co.edu.uniquindio.proyecto.modelo.documentos;
 
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
+import co.edu.uniquindio.proyecto.modelo.vo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
 import co.edu.uniquindio.proyecto.modelo.vo.Ubicacion;
 import lombok.*;
@@ -30,11 +31,12 @@ public class Reporte {
     private ObjectId categoriaId;
     private List<String> fotos;
     private EstadoReporte estadoActual;
+    private List<Comentario> comentarios;
 
     @Builder
     public Reporte(ObjectId id, LocalDateTime fecha, String descripcion, int contadorImportante, ObjectId clienteId,
                    String titulo, Ubicacion ubicacion, List<HistorialReporte> historial,
-                   ObjectId categoriaId, List<String> fotos, EstadoReporte estadoActual) {
+                   ObjectId categoriaId, List<String> fotos, EstadoReporte estadoActual,List<Comentario> comentarios) {
         this.id = id;
         this.fecha = fecha;
         this.descripcion = descripcion;
@@ -46,5 +48,6 @@ public class Reporte {
         this.categoriaId = categoriaId;
         this.fotos = fotos;
         this.estadoActual = estadoActual;
+        this.comentarios = comentarios;
     }
 }

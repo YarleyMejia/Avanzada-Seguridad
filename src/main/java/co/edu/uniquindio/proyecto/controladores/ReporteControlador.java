@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.controladores;
 
+import co.edu.uniquindio.proyecto.dto.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
@@ -8,10 +9,12 @@ import co.edu.uniquindio.proyecto.servicios.interfaces.ReporteServicio;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.oauth2.jwt.Jwt;
 
 @RestController
 @RequestMapping("/api/reportes")
@@ -67,6 +70,20 @@ public class ReporteControlador {
     public ResponseEntity<String> marcarImportante(@PathVariable String id) throws Exception {
         reporteServicio.marcarImportante(id);
         return ResponseEntity.ok("Reporte calificado como importante");
+    }
+
+
+    @SecurityRequirement(name = "bearerAuth")
+    @PostMapping("/comentarios")
+    public ResponseEntity<MensajeDTO<String>> agregarComentario(
+            @Valid @RequestBody CrearComentarioDTO crearComentarioDTO
+    ) {
+        try {
+            reporteServicio.agregarComentario(crearComentarioDTO);
+            return ResponseEntity.ok(new MensajeDTO<>(false, "Comentario agregado correctamente"));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MensajeDTO<>(true, e.getMessage()));
+        }
     }
 
 }

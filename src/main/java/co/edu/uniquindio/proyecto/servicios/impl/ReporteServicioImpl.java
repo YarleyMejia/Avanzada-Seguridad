@@ -1,9 +1,10 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
+import co.edu.uniquindio.proyecto.dto.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
-import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EstadoReporteDTO;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
+import co.edu.uniquindio.proyecto.modelo.vo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
@@ -27,6 +28,11 @@ public class ReporteServicioImpl implements ReporteServicio {
     private final ReporteRepo reporteRepo;
     private final ReporteMapper reporteMapper;
     private final UsuarioRepo usuarioRepo;
+
+
+    //private final ComentarioRepo comentarioRepo;
+    //private final UsuarioServicio usuarioServicio;
+
 
     @Override
     public void crearReporte(CrearReporteDTO crearReporteDTO) throws Exception {
@@ -173,4 +179,35 @@ public class ReporteServicioImpl implements ReporteServicio {
         // Guardar cambios
         reporteRepo.save(reporte);
     }
+
+    @Override
+    public void agregarComentario(CrearComentarioDTO crearComentarioDTO) throws Exception {
+        // Buscar el reporte al que se va a agregar el comentario
+        Reporte reporte = reporteRepo.findById(new ObjectId(crearComentarioDTO.idReporte()))
+                .orElseThrow(() -> new Exception("No se encontró el reporte con el ID: " + crearComentarioDTO.idReporte()));
+
+        // Crear el comentario
+        Comentario comentario = Comentario.builder()
+                .mensaje(crearComentarioDTO.mensaje())
+                .fecha(LocalDateTime.now())
+                .usuarioId(new ObjectId(crearComentarioDTO.idUsuario()))
+                .build();
+
+        // Agregarlo a la lista de comentarios
+        List<Comentario> comentarios = reporte.getComentarios();
+        if (comentarios == null) {
+            comentarios = new ArrayList<>();
+        }
+        comentarios.add(comentario);
+
+        // Setear los comentarios actualizados
+        reporte.setComentarios(comentarios);
+
+        // Guardar el reporte actualizado
+        reporteRepo.save(reporte);
+    }
+
+
 }
+
+

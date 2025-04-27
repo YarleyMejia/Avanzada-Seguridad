@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public record ComentarioDTO(
         String reporteId,
-        String clienteId,
+        String usuarioId,
         @NotBlank String mensaje,
         LocalDateTime fecha)
 {}
