@@ -31,12 +31,15 @@ public class ReporteControlador {
     }
 
     // Editar un reporte existente
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/editar/{id}")
     public ResponseEntity<MensajeDTO<String>> editar(@PathVariable String id, @Valid @RequestBody EditarReporteDTO dto) throws Exception {
         reporteServicio.editarReporte(id, dto);
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte editado correctamente"));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+    @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable String id) {
         try {
@@ -66,6 +69,7 @@ public class ReporteControlador {
 
 
     // Marca un reporte como importante
+    @SecurityRequirement(name = "bearerAuth")
     @PutMapping("/{id}/importante")
     public ResponseEntity<String> marcarImportante(@PathVariable String id) throws Exception {
         reporteServicio.marcarImportante(id);
