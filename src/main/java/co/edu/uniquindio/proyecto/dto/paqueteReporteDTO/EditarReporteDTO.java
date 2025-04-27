@@ -13,6 +13,7 @@ public record EditarReporteDTO(
         @NotBlank String descripcion,
         @NotNull Ubicacion ubicacion,
         @NotNull ObjectId categoriaId,
+        //@NotNull String categoriaId,
         @NotNull EstadoReporte estadoActual,
         List<String> fotos
 ) {}

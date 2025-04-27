@@ -20,6 +20,7 @@ public class ReporteControlador {
 
     private final ReporteServicio reporteServicio;
 
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/crear")
     public ResponseEntity<MensajeDTO<String>> crearReporte(@Valid @RequestBody CrearReporteDTO crearReporteDTO) throws Exception {
         reporteServicio.crearReporte(crearReporteDTO);

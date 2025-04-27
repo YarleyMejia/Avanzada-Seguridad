@@ -12,5 +12,6 @@ public class Ubicacion {
 
     private double latitud;
     private double longitud;
+   // private float radio;
 
 }
