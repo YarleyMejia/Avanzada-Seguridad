@@ -1,5 +1,6 @@
 package co.edu.uniquindio.proyecto.mapper;
 
+import co.edu.uniquindio.proyecto.dto.ReporteDTO;
 import co.edu.uniquindio.proyecto.dto.UbicacionDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
@@ -19,7 +20,7 @@ public interface ReporteMapper {
     @Mapping(target = "fecha", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "estadoActual", constant = "PENDIENTE")
     @Mapping(target = "contadorImportante", constant = "0")
-    @Mapping(target = "clienteId", expression = "java(new org.bson.types.ObjectId(dto.idUsuario()))")
+    @Mapping(target = "usuarioId", expression = "java(new org.bson.types.ObjectId(dto.idUsuario()))")
     @Mapping(target = "categoriaId", expression = "java(new org.bson.types.ObjectId(dto.categoriaId()))")
     @Mapping(target = "historial", expression = "java(new java.util.ArrayList<>())")
     @Mapping(target = "ubicacion", expression = "java(mapUbicacion(dto.ubicacion()))")
@@ -41,4 +42,8 @@ public interface ReporteMapper {
     default ObjectId map(String id) {
         return id != null ? new ObjectId(id) : null;
     }
+
+    ReporteDTO aDTO(Reporte reporte);
+
+
 }

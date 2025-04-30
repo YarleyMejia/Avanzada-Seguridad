@@ -1,14 +1,19 @@
 package co.edu.uniquindio.proyecto.servicios.impl;
 
+import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.CrearComentarioDTO;
+import co.edu.uniquindio.proyecto.dto.ReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
+import co.edu.uniquindio.proyecto.mapper.ComentarioMapper;
 import co.edu.uniquindio.proyecto.mapper.ReporteMapper;
+import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
 import co.edu.uniquindio.proyecto.modelo.vo.Comentario;
 import co.edu.uniquindio.proyecto.modelo.documentos.Reporte;
 import co.edu.uniquindio.proyecto.modelo.documentos.Usuario;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.modelo.vo.HistorialReporte;
+import co.edu.uniquindio.proyecto.repositorios.ComentarioRepo;
 import co.edu.uniquindio.proyecto.repositorios.ReporteRepo;
 import co.edu.uniquindio.proyecto.repositorios.UsuarioRepo;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ReporteServicio;
@@ -20,14 +25,29 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class ReporteServicioImpl implements ReporteServicio {
 
+    private final ComentarioRepo comentarioRepo;
+    private final ComentarioMapper comentarioMapper;
     private final ReporteRepo reporteRepo;
     private final ReporteMapper reporteMapper;
     private final UsuarioRepo usuarioRepo;
+
+    public ReporteServicioImpl(ComentarioRepo comentarioRepo,
+                               ComentarioMapper comentarioMapper,
+                               ReporteRepo reporteRepo,
+                               ReporteMapper reporteMapper,
+                               UsuarioRepo usuarioRepo) {
+        this.comentarioRepo = comentarioRepo;
+        this.comentarioMapper = comentarioMapper;
+        this.reporteRepo = reporteRepo;
+        this.reporteMapper = reporteMapper;
+        this.usuarioRepo = usuarioRepo; // ✅ esto es lo que te está faltando
+    }
+
 
 
     //private final ComentarioRepo comentarioRepo;
@@ -59,6 +79,7 @@ public class ReporteServicioImpl implements ReporteServicio {
         // Guardar el reporte
         reporteRepo.save(reporte);
     }
+
 
     @Override
     public void editarReporte(String id, EditarReporteDTO dto) throws Exception {
@@ -162,7 +183,7 @@ public class ReporteServicioImpl implements ReporteServicio {
         reporte.setContadorImportante(reporte.getContadorImportante() + 1);
 
         // Obtener el ID del usuario creador del reporte
-        ObjectId creadorId = reporte.getClienteId();
+        ObjectId creadorId = reporte.getUsuarioId();
 
 
 
@@ -188,6 +209,7 @@ public class ReporteServicioImpl implements ReporteServicio {
 
         // Crear el comentario
         Comentario comentario = Comentario.builder()
+                .reporteId(new ObjectId(crearComentarioDTO.idReporte()))
                 .mensaje(crearComentarioDTO.mensaje())
                 .fecha(LocalDateTime.now())
                 .usuarioId(new ObjectId(crearComentarioDTO.idUsuario()))
@@ -206,6 +228,74 @@ public class ReporteServicioImpl implements ReporteServicio {
         // Guardar el reporte actualizado
         reporteRepo.save(reporte);
     }
+
+
+    @Override
+    public List<ComentarioDTO> listarComentarios(String idReporte) throws Exception {
+        // Obtener el reporte completo por ID
+        Reporte reporte = reporteRepo.findById(new ObjectId(idReporte))
+                .orElseThrow(() -> new Exception("Reporte no encontrado"));
+
+        // Obtener los comentarios del reporte
+        List<Comentario> comentarios = reporte.getComentarios();
+
+        // Convertirlos a DTO
+        List<ComentarioDTO> comentarioDTOs = new ArrayList<>();
+        for (Comentario c : comentarios) {
+            comentarioDTOs.add(comentarioMapper.aDTO(c));
+        }
+
+        return comentarioDTOs;
+    }
+
+    @Override
+    public List<ReporteDTO> listarReportesPorUsuario(String idUsuario) throws Exception {
+        // Validar que el usuario existe (opcional pero recomendado)
+        if (!usuarioRepo.existsById(new ObjectId(idUsuario))) {
+            throw new Exception("El usuario con ID " + idUsuario + " no existe.");
+        }
+
+        // Buscar todos los reportes que pertenecen al usuario
+        List<Reporte> reportes = reporteRepo.findAllByUsuarioId(new ObjectId(idUsuario));
+
+        // Convertir a DTOs
+        List<ReporteDTO> reporteDTOs = new ArrayList<>();
+        for (Reporte reporte : reportes) {
+            reporteDTOs.add(reporteMapper.aDTO(reporte));
+        }
+
+        return reporteDTOs;
+    }
+
+
+    @Override
+    public ReporteDTO obtenerReportePorId(String id) throws Exception {
+        ObjectId objectId;
+        try {
+            objectId = new ObjectId(id);
+        } catch (IllegalArgumentException e) {
+            throw new Exception("ID de reporte inválido");
+        }
+
+        Reporte reporte = reporteRepo.findById(objectId)
+                .orElseThrow(() -> new Exception("No se encontró un reporte con el ID proporcionado"));
+
+        return reporteMapper.aDTO(reporte); //
+    }
+    @Override
+    public List<ReporteDTO> listarReportesPorUsuarioYEstado(String idUsuario, EstadoReporte estado) throws Exception {
+        ObjectId usuarioObjectId = new ObjectId(idUsuario);
+
+        List<Reporte> reportes = reporteRepo.findAllByUsuarioIdAndEstadoActual(usuarioObjectId, estado);
+
+        return reportes.stream()
+                .map(reporteMapper::aDTO)
+                .collect(Collectors.toList());
+    }
+
+
+
+
 
 
 }

@@ -48,6 +48,7 @@ public class SecurityConfig {
                                 "/api/usuarios/codigoVerificacion",
                                 "/api/usuarios/*/activar",
                                 "/api/usuarios/*/cambiarPassword",
+                                "/api/reportes/**",
                                 "/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
@@ -55,11 +56,10 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // Ejemplo de endpoint solo para ADMIN
-                       // .requestMatchers(HttpMethod.POST, "/api/usuarios/**").hasRole("ADMINISTRADOR")
-                       // .requestMatchers(HttpMethod.DELETE, "/api/reportes/**").hasRole("ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.DELETE, "/api/usuarios/**").hasRole("ADMINISTRADOR")
-                        .requestMatchers(HttpMethod.DELETE, "/api/reportes/**").hasRole("ADMINISTRADOR") // Protección específica
-                        .requestMatchers("/api/reportes/**").authenticated() // El resto de métodos requieren autenticación
+
+                        //.requestMatchers(HttpMethod.DELETE, "/api/usuarios/**").hasRole("ADMINISTRADOR")
+                        //.requestMatchers(HttpMethod.DELETE, "/api/reportes/**").hasRole("ADMINISTRADOR") // Protección específica
+                        //.requestMatchers("/api/reportes/**").authenticated() // El resto de métodos requieren autenticación
 
                         .anyRequest().authenticated()
                 )

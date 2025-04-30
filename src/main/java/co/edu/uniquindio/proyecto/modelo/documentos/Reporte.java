@@ -24,7 +24,7 @@ public class Reporte {
     private LocalDateTime fecha;
     private String descripcion;
     private int contadorImportante;
-    private ObjectId clienteId;
+    private ObjectId usuarioId;
     private String titulo;
     private Ubicacion ubicacion;
     private List<HistorialReporte> historial;
@@ -34,14 +34,14 @@ public class Reporte {
     private List<Comentario> comentarios;
 
     @Builder
-    public Reporte(ObjectId id, LocalDateTime fecha, String descripcion, int contadorImportante, ObjectId clienteId,
+    public Reporte(ObjectId id, LocalDateTime fecha, String descripcion, int contadorImportante, ObjectId usuarioId,
                    String titulo, Ubicacion ubicacion, List<HistorialReporte> historial,
                    ObjectId categoriaId, List<String> fotos, EstadoReporte estadoActual,List<Comentario> comentarios) {
         this.id = id;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.contadorImportante = contadorImportante;
-        this.clienteId = clienteId;
+        this.usuarioId = usuarioId;
         this.titulo = titulo;
         this.ubicacion = ubicacion;
         this.historial = historial;

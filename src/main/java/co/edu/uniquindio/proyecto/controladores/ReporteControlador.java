@@ -1,9 +1,12 @@
 package co.edu.uniquindio.proyecto.controladores;
 
+import co.edu.uniquindio.proyecto.dto.ComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.CrearComentarioDTO;
 import co.edu.uniquindio.proyecto.dto.MensajeDTO;
+import co.edu.uniquindio.proyecto.dto.ReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.CrearReporteDTO;
 import co.edu.uniquindio.proyecto.dto.paqueteReporteDTO.EditarReporteDTO;
+import co.edu.uniquindio.proyecto.modelo.documentos.Categoria;
 import co.edu.uniquindio.proyecto.modelo.enums.EstadoReporte;
 import co.edu.uniquindio.proyecto.servicios.interfaces.ReporteServicio;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -15,6 +18,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.oauth2.jwt.Jwt;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/reportes")
@@ -38,7 +43,7 @@ public class ReporteControlador {
         return ResponseEntity.ok(new MensajeDTO<>(false, "Reporte editado correctamente"));
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMINISTRADOR')")
+    @PreAuthorize("hasRole('ADMINISTRADOR')")
     @SecurityRequirement(name = "bearerAuth")
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<MensajeDTO<String>> eliminar(@PathVariable String id) {
@@ -89,5 +94,46 @@ public class ReporteControlador {
             return ResponseEntity.badRequest().body(new MensajeDTO<>(true, e.getMessage()));
         }
     }
+
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/reporte/{id}/comentarios")
+    public ResponseEntity<MensajeDTO> obtenerComentariosDeReporte(@PathVariable String id) throws Exception {
+
+            List<ComentarioDTO> comentarios = reporteServicio.listarComentarios(id);
+            return ResponseEntity.ok(new MensajeDTO(false, comentarios));
+
+    }
+
+
+    @SecurityRequirement(name = "bearerAuth")
+    @GetMapping("/usuario/{id}")
+    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> listarReportesPorUsuario(@PathVariable String id) throws Exception {
+        List<ReporteDTO> reportes = reporteServicio.listarReportesPorUsuario(id);
+        return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MensajeDTO<ReporteDTO>> obtenerReportePorId(@PathVariable String id) throws Exception {
+
+            ReporteDTO reporte = reporteServicio.obtenerReportePorId(id);
+            return ResponseEntity.ok(new MensajeDTO<>(false, reporte));
+
+    }
+
+
+    
+    @GetMapping("/usuario/{id}/estado/{estado}")
+    public ResponseEntity<MensajeDTO<List<ReporteDTO>>> listarReportesPorUsuarioYEstado(
+            @PathVariable String id,
+            @PathVariable EstadoReporte estado
+    ) throws Exception {
+        List<ReporteDTO> reportes = reporteServicio.listarReportesPorUsuarioYEstado(id, estado);
+        return ResponseEntity.ok(new MensajeDTO<>(false, reportes));
+    }
+
+
+
+
 
 }

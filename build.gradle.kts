@@ -33,6 +33,7 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-mail") //verificar
 
     implementation ("org.springframework.boot:spring-boot-starter-oauth2-resource-server") //nueva
+    implementation ("org.modelmapper:modelmapper:3.1.1")
 
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")
