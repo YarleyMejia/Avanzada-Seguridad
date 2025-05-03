@@ -19,14 +19,4 @@ public interface ComentarioMapper {
     static String objectIdToString(ObjectId id) {
         return id != null ? id.toHexString() : null;
     }
-
-
-    //Si quieres un método de conversión inversa, agrégalo así:
-    // @Mapping(source = "reporteId", target = "reporteId", qualifiedByName = "stringToObjectId")
-    // Comentario deDTO(ComentarioDTO dto);
-
-    // @Named("stringToObjectId")
-    // static ObjectId stringToObjectId(String id) {
-    //     return id != null ? new ObjectId(id) : null;
-    // }
 }
