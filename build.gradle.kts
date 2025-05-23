@@ -31,9 +31,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0")
     implementation ("org.springframework.boot:spring-boot-starter-mail") //verificar
+<<<<<<< HEAD
     implementation ("org.springframework.boot:spring-boot-starter-mail")
     implementation ("org.springframework.boot:spring-boot-starter-websocket")
-
+=======
 
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.jsonwebtoken:jjwt-api:0.12.6")
@@ -43,6 +44,7 @@ dependencies {
     // Dependencia para soporte WebSocket con STOMP
     implementation ("org.springframework.boot:spring-boot-starter-websocket")
 
+>>>>>>> pablo
     implementation("org.mapstruct:mapstruct:1.6.3")
     annotationProcessor("org.mapstruct:mapstruct-processor:1.6.3")
 
